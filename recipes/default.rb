@@ -22,8 +22,8 @@ package node['dhcp-client']['package'] do
 end
 
 request_options = node['dhcp-client']['request']['default_options']
-if node['dhcp-client']['dhcp6_enabled']
-  request_options += node['dhcp-client']['request']['dhcp6_options']
+unless node['dhcp-client']['dhcp6_enabled']
+  request_options -= node['dhcp-client']['request']['dhcp6_options']
 end
 unless node['dhcp-client']['resolv_conf_update']
   request_options -= node['dhcp-client']['request']['resolv_options']
